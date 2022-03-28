@@ -1,0 +1,17 @@
+body{ 
+    /* background: #3E5151;  /* fallback for old browsers */
+    /* background: -webkit-linear-gradient(to right, #DECBA4, #3E5151);  
+    background: linear-gradient(to right, #DECBA4, #3E5151); */
+     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background:"white";
+
+} 
+.wrapper{ 
+    width: 80%; 
+    margin: auto; 
+    grid-gap: 50px; 
+    display: grid;  
+     grid-template-columns: 1fr 1fr 1fr; 
+    flex-direction: row;
+    color: black; 
+}
