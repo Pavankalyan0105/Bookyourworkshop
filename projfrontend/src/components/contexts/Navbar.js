@@ -73,7 +73,7 @@ useEffect( () => {
                 style={{
                   color: color.explore
                 }}
-                exact
+                
                 to="/home"
                 activeClassName="active"
                 className="nav-links"

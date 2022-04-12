@@ -4,6 +4,8 @@ import emailjs from "emailjs-com";
 import NavBar from './Navbar';
 import '../css/editprofile.css';
 import axios from "axios"
+import { ToastContainer, toast } from 'react-toastify';
+
 emailjs.init('JAWTb9rtcQjUNLTQj') 
  
 const Editprofile = () => { 
@@ -24,7 +26,10 @@ const Editprofile = () => {
         if(details.name==="" && details.email === ""){
             setDetails(JSON.parse(localStorage.getItem("user")));
             console.log("user", JSON.parse(localStorage.getItem("user")) );
+            console.log("Came here inside");
+        
         }
+        console.log("Came here");
     } , [])
 
     const token = {
@@ -48,12 +53,23 @@ const Editprofile = () => {
                 body , token
             )
             .then(
-                res => console.log(res.data)
+                res =>( 
+                    console.log("res-data",res.data),
+                    dispatch(res.data),
+                    console.log("val" , val),
+                    console.log(localStorage.getItem("user")),
+                    localStorage.setItem("user" , JSON.stringify(res.data)),
+                    toast.success("Sucessfully updated the profile", {
+                        position: toast.POSITION.BOTTOM_RIGHT,
+                        delay: 1000
+                      })
+                )
+                
             ).catch(err => console.log(err) )
-
 
     }
 
+   
 
     return( 
         <div>

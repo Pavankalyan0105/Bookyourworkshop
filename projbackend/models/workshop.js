@@ -30,7 +30,11 @@ var workshopSchema = new mongoose.Schema({
         type: String
     },
 
-    date:{
+    fromDate:{
+        type: Date,
+        required: true
+    },
+    toDate:{
         type: Date,
         required: true
     },
@@ -42,6 +46,7 @@ var workshopSchema = new mongoose.Schema({
         type: String,
         required : true,
     },
+
     instructor:{
         type: String,
         required: true
@@ -49,6 +54,9 @@ var workshopSchema = new mongoose.Schema({
     students:{
         type: Array,
         required:[]
+    },
+    imgNo:{
+        type:Number,
     }
 },
 { timestamps: true }

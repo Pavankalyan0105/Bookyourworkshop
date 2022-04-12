@@ -1,7 +1,8 @@
 import React, { useState , useEffect} from "react";
 import axios from 'axios'
 import { Navigate } from 'react-router-dom';
-import emailjs from "emailjs-com"; 
+import emailjs from "emailjs-com";
+import { ToastContainer, toast } from 'react-toastify';
 emailjs.init('JAWTb9rtcQjUNLTQj')
 
 const FacultyRegistration = () => {
@@ -20,6 +21,7 @@ const FacultyRegistration = () => {
     const [success , setSucess] = useState(false)
     const [user , setUser] = useState({})
     const [err , setErr] = useState("")
+    const [ regCompleted , setRegCompleted] = useState("-1") 
     
 
 
@@ -78,14 +80,19 @@ const FacultyRegistration = () => {
           ).then(
               res =>( 
                   setSucess(true),
-                  setUser(res.data.user)
-
+                  setUser(res.data.user),
+                  toast.success("faculty registration successful!", {
+                    position: toast.POSITION.BOTTOM_RIGHT
+                  })
                 )
        ).catch(
            err => console.log(err)
        )
 
     }
+
+    if(success)
+        return <Navigate to="/login"/>
 
     
     

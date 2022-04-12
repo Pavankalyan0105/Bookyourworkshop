@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import NavBar from './contexts/Navbar';
 import "./css/wrapper.css";
 
+
+
 const Myworkshops = () => {
 
     const [workshops , setWorkshops] = useState([])
@@ -38,7 +40,11 @@ const Myworkshops = () => {
                     textAlign:"center",
                     margin:"1rem"
                 }}
+
             >My workshops</h1>
+
+
+
             <input 
                     style={{
                         align:"center",

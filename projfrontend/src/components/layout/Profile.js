@@ -29,7 +29,7 @@ const Profile = () => {
     return ( 
         <div 
             style={{
-                backgroundColor:"#e7feff"
+                backgroundColor:"#fsdde0"
             }}
         > 
             <NavBar/>
@@ -138,7 +138,7 @@ const Profile = () => {
                         id="email" 
                         placeholder="Enter your state"
                         // onChange={e => setDetails({...details , state: e.target.value})}
-                        // value={details.regdno}
+                        value={val.state}
                        
                         required
                         disabled = {isDisable}
@@ -156,7 +156,8 @@ const Profile = () => {
 
                     placeholder="Enter your District"
                     // onChange={e => setDetails({...details , district: e.target.value})}
-                    // value={details.regdno}
+                        value={val.district}
+                        // value={details.regdno}
                     required
                     disabled = {isDisable}
 

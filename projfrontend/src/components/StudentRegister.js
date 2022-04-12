@@ -3,6 +3,8 @@ import axios from 'axios'
 import Navbar from './contexts/Navbar'
 import {Navigate} from 'react-router-dom';
 import emailjs from "emailjs-com"; 
+import { ToastContainer, toast } from 'react-toastify';
+
 emailjs.init('JAWTb9rtcQjUNLTQj')
 
 
@@ -80,7 +82,10 @@ const StudentRegister = () => {
               ).then(
                   res =>( 
                       setSucess(true),
-                      setUser(res.data.user)
+                      setUser(res.data.user),
+                      toast.success("student registration successful!", {
+                        position: toast.POSITION.BOTTOM_RIGHT
+                      })
 
                     )
            ).catch(
@@ -90,7 +95,7 @@ const StudentRegister = () => {
     }
 
     if(success)
-        return <Navigate to="/"/>
+        return <Navigate to="/login"/>
     
     return (
         <form

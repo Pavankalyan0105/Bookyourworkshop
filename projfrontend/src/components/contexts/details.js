@@ -11,7 +11,7 @@ const DetailsProvider = (props) => {
         regdno:""
     }) 
     return ( 
-        <detailsContext.Provider value={{val:user, dispatch: (data) => setUser(data) } }> 
+        <detailsContext.Provider value={{val:user, dispatch: (data) => ( setUser(data) , console.log("Changed dispatch",user) ) } }> 
             {props.children} 
         </detailsContext.Provider> 
     ) 

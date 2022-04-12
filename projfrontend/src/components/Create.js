@@ -3,12 +3,15 @@ import axios from 'axios';
 import { Navigate } from "react-router-dom";
 import NavBar from './contexts/Navbar.js';
 import "./css/create.css"
+import moment from "moment"
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 toast.configure()
 
 const Create = () => { 
+
+
 
     const [role , setRole ] = useState(0)
     const [success , setSuccess] = useState(false)
@@ -20,7 +23,8 @@ const Create = () => {
         seats: 0, 
         accno: "", 
         IFSC : "", 
-        date:"", 
+        fromDate:"", 
+        toDate:"", 
         fromTime:"", 
         toTime:"", 
         instructor:""
@@ -32,7 +36,7 @@ const Create = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const {name, info, amount , seats ,accno , date ,IFSC, fromTime , toTime , instructor} = details;
+        const {name, info, amount , seats ,accno , fromDate, toDate ,IFSC, fromTime , toTime , instructor} = details;
 
         const token = {
             headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
@@ -45,10 +49,12 @@ const Create = () => {
             seats: seats,
             accno: accno,
             IFSC: IFSC,
-            date: date,
+            fromDate: fromDate,
+            toDate: toDate,
             fromTime: fromTime,
             toTime: toTime,
-            instructor: instructor
+            instructor: instructor,
+            imgNo:Math.floor( (Math.random() * 24) + 1 )
         };
 
         await axios.post(
@@ -83,19 +89,31 @@ const Create = () => {
     if(success)
         return <Navigate to="/myworkshops"/>;
 
+
+        const disablePastDate = () => {
+            const today = new Date();
+            const dd = String(today.getDate() + 1).padStart(2, "0");
+            const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+            const yyyy = today.getFullYear();
+            return yyyy + "-" + mm + "-" + dd;
+        };
+
     return ( 
         <form onSubmit={handleSubmit}> 
             <NavBar/>
             <br /> 
 
             <div className="rcontainer">
+            <br />
+            <br />
+            <br />
 
-            <label for="email"><b>Name: </b></label>
+            <label for="email"><b>Name:</b></label>
             <input  
             type="text"  
             name="firstname"  
             id = "firstname"  
-            placeholder="Enter First Name" 
+            placeholder="Enter workshop Name" 
             onChange={e => setDetails({...details, name:e.target.value})} 
             value={details.name} 
             required
@@ -162,19 +180,32 @@ const Create = () => {
             /><br /> 
  
              
-            <label for="email"><b>date: </b></label>
+            <label for="email"><b>Fromdate: </b></label>
             <input  
                 type="date" 
                 name="date" 
                 id="date"  
-                placeholder="Enter date of coduct" 
-                onChange={e => setDetails({...details,date:e.target.value})} 
+                min={disablePastDate()}
+                placeholder="Enter start date of coduct" 
+                onChange={e => setDetails({...details,fromDate:e.target.value})} 
+                value={details.date} 
+                required
+            /><br /> 
+
+            <label for="email"><b>Todate: </b></label>
+            <input  
+                type="date" 
+                name="date" 
+                id="date"  
+                min={disablePastDate()}
+                placeholder="Enter end date of coduct" 
+                onChange={e => setDetails({...details,toDate:e.target.value})} 
                 value={details.date} 
                 required
             /><br /> 
  
              
-            <label for="email"><b>fromTime: </b></label>
+            <label for="email"><b>FromTime: </b></label>
             <input  
                 type="time" 
                 name="fromTime" 
@@ -186,7 +217,7 @@ const Create = () => {
             /><br /> 
  
              
-            <label for="email"><b>toTime: </b></label>
+            <label for="email"><b>ToTime: </b></label>
             <input  
                 type="time" 
                 name="toTime" 

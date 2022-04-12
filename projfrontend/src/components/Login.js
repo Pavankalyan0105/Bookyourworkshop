@@ -35,14 +35,18 @@ const Login = () => {
                 localStorage.setItem("token" , res.data.token),
                 localStorage.setItem("id" , res.data.user._id),
                 localStorage.setItem("role" , res.data.user.role),
-                setAuth(true)
+                setAuth(true),
+                toast.success("login successful!", {
+                  position: toast.POSITION.BOTTOM_RIGHT
+                })
                 // Redirect to dashboard after login
             )
        ).catch(
            err => {
              setErr("Please enter valid details")
              toast.error("Please Enter Valid details!", {
-              position: toast.POSITION.BOTTOM_RIGHT
+              position: toast.POSITION.BOTTOM_RIGHT,
+              delay: 1000
             });
           }
        )

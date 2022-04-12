@@ -23,6 +23,7 @@ exports.createWorkshop = (req , res) => {
     newWorkshop.facultyid = req.profile._id;
     newWorkshop.college = req.profile.college;
 
+    console.log(data)
 
     newWorkshop.save(
         (err , workshop) => {
@@ -33,6 +34,7 @@ exports.createWorkshop = (req , res) => {
             }
             req.profile.workshops.push(newWorkshop);
             req.profile.save()
+            console.log(workshop);
             return res.json(workshop)
         }
     )

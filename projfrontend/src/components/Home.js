@@ -17,6 +17,8 @@ const Home = () => {
             "http://localhost:8000/api/getallworkshops")
           .then(
               res => setWorkshops(res.data)
+          ).catch( err =>
+              console.log(err.message)
           )
     } , [])
 
@@ -66,7 +68,7 @@ const Home = () => {
                     }
                  ).map( (ws,key) => {
                      return (
-                        <Card className="user" workshop={ws} page="Home"/>
+                        <Card key={Math.floor((Math.random() * 24) + 1) } className="user" workshop={ws} page="Home"/>
                      )
                  } )
             }    
