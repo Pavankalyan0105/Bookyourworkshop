@@ -2,6 +2,8 @@ import React ,{useContext,useState , useEffect} from 'react';
 import detailsContext from './context'; 
 import emailjs from "emailjs-com"; 
 import NavBar from './Navbar';
+import { Navigate } from "react-router-dom";
+
 import '../css/editprofile.css';
 import axios from "axios"
 import { ToastContainer, toast } from 'react-toastify';
@@ -9,6 +11,7 @@ import { ToastContainer, toast } from 'react-toastify';
 emailjs.init('JAWTb9rtcQjUNLTQj') 
  
 const Editprofile = () => { 
+    const [saved , setSaved] = useState(false)
     const {val,dispatch}=useContext(detailsContext); 
     const [details, setDetails] = useState({ 
         name: val.name, 
@@ -59,6 +62,7 @@ const Editprofile = () => {
                     console.log("val" , val),
                     console.log(localStorage.getItem("user")),
                     localStorage.setItem("user" , JSON.stringify(res.data)),
+                    setSaved(true),
                     toast.success("Sucessfully updated the profile", {
                         position: toast.POSITION.BOTTOM_RIGHT,
                         delay: 1000
@@ -69,7 +73,9 @@ const Editprofile = () => {
 
     }
 
-   
+   if(saved) {
+    return <Navigate to="/profile"/>
+   }
 
     return( 
         <div>
